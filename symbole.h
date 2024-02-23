@@ -3,9 +3,9 @@
 #include <string>
 using namespace std;
 
-enum Identificateurs { OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR };
+enum Identificateurs { OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR, E };
 
-const string Etiquettes[] = { "OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR" };
+const string Etiquettes[] = { "OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR", "E" };
 
 class Symbole {
    public:
@@ -13,7 +13,7 @@ class Symbole {
       virtual ~Symbole() { }
       operator int() const { return ident; }
       virtual void Affiche();
-
+      virtual void isTerminal();
    protected:
       int ident;
 };
