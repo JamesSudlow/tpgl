@@ -8,6 +8,7 @@ class Automate{
     void decalage(Symbole * s, Etat * e);
     void reduction(int n,Symbole * s);
     void transitionSimple(Symbole * s, Etat * e);
+    void popSymbol();
     private:
     Lexer* lexer;
     vector<Symbole*> symbolstack;
