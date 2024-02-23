@@ -121,7 +121,9 @@ bool E7::transition(Automate & automate, Symbole * s) {
     case CLOSEPAR:
     case FIN:
         automate.popSymbol();
-        automate.reduction(1, new Symbole(E));
+        automate.popSymbol();
+        automate.popSymbol();
+        automate.reduction(3, new Symbole(E));
         break;       
     }
     return false;
