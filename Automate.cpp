@@ -1,14 +1,14 @@
 #include "Automate.h"
-Automate::Automate(Lexer l){
-    this->lexer=&l;
- 
+
+Automate::Automate(Lexer* l, Etat* e){
+    this->lexer=l;
+    statestack.push_back(e);
 }
 
 void Automate::decalage(Symbole * s, Etat * e) {
     symbolstack.push_back(s);
     statestack.push_back(e);
-    lexer->Avancer(); //ça sert à quoi
-    
+    lexer->Avancer();   
 }
 void Automate::transitionSimple(Symbole * s, Etat * e) {
     symbolstack.push_back(s);

@@ -2,17 +2,16 @@
 #include "Etat.h"
 #include <vector>
 #include "lexer.h"
-
+#include <iostream>
 
 class Automate{
     public:
-    Automate(Lexer l);
+    Automate(Lexer* l, Etat* e);
     void decalage(Symbole * s, Etat * e);
     void reduction(int n,Symbole * s);
     void transitionSimple(Symbole * s, Etat * e);
     void popSymbol();
-    private:
     Lexer* lexer;
     vector<Symbole*> symbolstack;
-    vector<Etat*> statestack;
+    vector<Etat*> statestack; 
 };

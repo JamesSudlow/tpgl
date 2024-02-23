@@ -6,7 +6,7 @@ Etat::Etat(string name){
     this->name=name;
 }
 Etat::~Etat(){}
-E0::E0():Etat("E1"){}
+E0::E0():Etat("E0"){}
 E1::E1():Etat("E1"){}
 E2::E2():Etat("E2"){}
 E3::E3():Etat("E3"){}
@@ -27,16 +27,20 @@ E7::~E7(){}
 E8::~E8(){}
 E9::~E9(){}
 bool E0::transition(Automate & automate, Symbole * s) {
+    cout<<"In E0"<<endl;
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
         break;
     case OPENPAR:
+        cout<<"call décalage"<<endl;
         automate.decalage(s, new E2);
         break;
     case E:
         automate.transitionSimple(s, new E1);
-        break;       
+        break;  
+    default:
+        cout<<"NO case"<<endl;     
     }
     return false;
 }
