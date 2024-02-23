@@ -1,3 +1,4 @@
+#pragma once
 #include "symbole.h"
 class Automate;
 class Etat {
@@ -55,7 +56,8 @@ class E6 : public Etat{
     void print() const;
     bool transition(Automate & automate, Symbole * s);
     protected: string name;
-}; class E7 : public Etat{
+}; 
+class E7 : public Etat{
     public:E7();
     ~E7();
     void print() const;
