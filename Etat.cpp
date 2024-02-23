@@ -128,3 +128,33 @@ bool E7::transition(Automate & automate, Symbole * s) {
     }
     return false;
 }
+
+bool E8::transition(Automate & automate,Symbole * s) {
+        switch (*s){
+            case PLUS:
+            case MULT:
+            case CLOSEPAR:
+            case FIN:
+                automate.popSymbol();
+                automate.popSymbol();
+                automate.popSymbol();
+                automate.reduction(3, new Symbole(E));
+            break;
+        }
+return false;
+}
+
+bool E9::transition(Automate & automate,Symbole * s) {
+        switch (*s){
+            case PLUS:
+            case MULT:
+            case CLOSEPAR:
+            case FIN:
+                automate.popSymbol();
+                automate.popSymbol();
+                automate.popSymbol();
+                automate.reduction(4, new Symbole(E));
+            break;
+        }
+return false;
+}
