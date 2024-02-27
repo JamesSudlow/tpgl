@@ -21,9 +21,9 @@ int main(void) {
    int i=0;
    while(!automate->statestack.back()->transition(*automate, s) && i<10){
       s=l.Consulter();
-      cout<<automate->statestack.back()->name;
-      s->Affiche();
-      cout<<endl;
+      //cout<<automate->statestack.back()->name;
+      //s->Affiche();
+      //cout<<endl;
       //i++;
    }
    return 0;

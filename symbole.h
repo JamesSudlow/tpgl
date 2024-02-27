@@ -20,9 +20,9 @@ class Symbole {
 class Entier : public Symbole {
    public:
       Entier(int v) : Symbole(INT), valeur(v) { }
+      Entier(int v, int i) : Symbole(i), valeur(v) { }
       ~Entier() { }
       virtual void Affiche();
-   protected:
       int valeur;
 };
 

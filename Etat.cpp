@@ -27,20 +27,16 @@ E7::~E7(){}
 E8::~E8(){}
 E9::~E9(){}
 bool E0::transition(Automate & automate, Symbole * s) {
-    cout<<"In E0"<<endl;
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
         break;
     case OPENPAR:
-        cout<<"call décalage"<<endl;
         automate.decalage(s, new E2);
         break;
     case E:
         automate.transitionSimple(s, new E1);
         break;  
-    default:
-        cout<<"NO case"<<endl;     
     }
     return false;
 }
@@ -78,8 +74,9 @@ bool E3::transition(Automate & automate, Symbole * s) {
     case MULT:
     case CLOSEPAR:
     case FIN:
-        automate.popSymbol();
-        automate.reduction(1, new Symbole(E));
+
+        int a=automate.popReturnSymbol();
+        automate.reduction(1, new Entier(a,E));
         break;       
     }
     return false;
@@ -134,10 +131,10 @@ bool E7::transition(Automate & automate, Symbole * s) {
     case PLUS:
     case CLOSEPAR:
     case FIN:
+        int a=automate.popReturnSymbol();
         automate.popSymbol();
-        automate.popSymbol();
-        automate.popSymbol();
-        automate.reduction(3, new Symbole(E));
+        int b=automate.popReturnSymbol();
+        automate.reduction(3, new Entier(a+b,E));
         break;       
     }
     return false;
@@ -149,10 +146,10 @@ bool E8::transition(Automate & automate,Symbole * s) {
             case MULT:
             case CLOSEPAR:
             case FIN:
+                int a=automate.popReturnSymbol();
                 automate.popSymbol();
-                automate.popSymbol();
-                automate.popSymbol();
-                automate.reduction(3, new Symbole(E));
+                int b=automate.popReturnSymbol();
+                automate.reduction(3, new Entier(a*b,E));
             break;
         }
 return false;
@@ -165,9 +162,9 @@ bool E9::transition(Automate & automate,Symbole * s) {
             case CLOSEPAR:
             case FIN:
                 automate.popSymbol();
+                int a=automate.popReturnSymbol();
                 automate.popSymbol();
-                automate.popSymbol();
-                automate.reduction(3, new Symbole(E));
+                automate.reduction(3, new Entier(a,E));
             break;
         }
 return false;

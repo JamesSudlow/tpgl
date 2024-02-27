@@ -14,7 +14,8 @@ void Automate::transitionSimple(Symbole * s, Etat * e) {
     symbolstack.push_back(s);
     statestack.push_back(e);
 }
-void Automate::reduction(int n,Symbole * s) {
+void Automate::reduction(int n,Entier * s) {
+    cout<<s->valeur<<endl;
     for (int i=0;i<n;i++)
     {
         delete(statestack.back());
@@ -24,4 +25,9 @@ void Automate::reduction(int n,Symbole * s) {
 }
 void Automate::popSymbol(){
     symbolstack.pop_back();
+}
+int Automate::popReturnSymbol(){
+    Entier* e= (Entier *)symbolstack.back();
+    symbolstack.pop_back();
+    return e->valeur;
 }
