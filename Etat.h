@@ -1,5 +1,7 @@
 #pragma once
 #include "symbole.h"
+using namespace std;
+
 class Automate;
 class Etat {
     public:Etat(string name);

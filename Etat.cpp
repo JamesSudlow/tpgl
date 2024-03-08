@@ -27,6 +27,7 @@ E7::~E7(){}
 E8::~E8(){}
 E9::~E9(){}
 bool E0::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -36,11 +37,15 @@ bool E0::transition(Automate & automate, Symbole * s) {
         break;
     case E:
         automate.transitionSimple(s, new E1);
-        break;  
+        break;
+    default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 bool E1::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
     switch (*s){
     case PLUS:
         automate.decalage(s, new E4);
@@ -50,11 +55,15 @@ bool E1::transition(Automate & automate, Symbole * s) {
         break;
     case FIN:
         return true;  
-        break;  
+        break;
+        default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 bool E2::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -64,24 +73,33 @@ bool E2::transition(Automate & automate, Symbole * s) {
         break;
     case E:
         automate.transitionSimple(s, new E6);
-        break;       
+        break;
+    default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 bool E3::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
+    int a;
     switch (*s){
     case PLUS:
     case MULT:
     case CLOSEPAR:
     case FIN:
 
-        int a=automate.popReturnSymbol();
+        a=automate.popReturnSymbol();
         automate.reduction(1, new Entier(a,E));
-        break;       
+        break;   
+    default:
+        automate.transitionSimple(&err, this);
+        break;    
     }
     return false;
 }
 bool E4::transition(Automate & automate, Symbole * s) {
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -91,11 +109,15 @@ bool E4::transition(Automate & automate, Symbole * s) {
         break;
     case E:
         automate.transitionSimple(s, new E7);
-        break;       
+        break;
+    default:
+        automate.transitionSimple(err, this);
+        break;
     }
     return false;
 }
 bool E5::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -106,10 +128,14 @@ bool E5::transition(Automate & automate, Symbole * s) {
     case E:
         automate.transitionSimple(s, new E8);
         break;       
+    default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 bool E6::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
     switch (*s){
     case PLUS:
         automate.decalage(s, new E4);
@@ -120,10 +146,15 @@ bool E6::transition(Automate & automate, Symbole * s) {
     case CLOSEPAR:
         automate.decalage(s, new E9);
         break;       
+    default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 bool E7::transition(Automate & automate, Symbole * s) {
+    Symbole err= Symbole(ERREUR);
+    int a,b;
     switch (*s){
     case MULT:
         automate.decalage(s, new E5);
@@ -131,41 +162,55 @@ bool E7::transition(Automate & automate, Symbole * s) {
     case PLUS:
     case CLOSEPAR:
     case FIN:
-        int a=automate.popReturnSymbol();
+        a=automate.popReturnSymbol();
         automate.popSymbol();
-        int b=automate.popReturnSymbol();
+        b=automate.popReturnSymbol();
         automate.reduction(3, new Entier(a+b,E));
         break;       
+    default:
+        automate.transitionSimple(&err, this);
+        break;
     }
     return false;
 }
 
 bool E8::transition(Automate & automate,Symbole * s) {
+    Symbole err= Symbole(ERREUR);
+    int a,b;
         switch (*s){
             case PLUS:
             case MULT:
             case CLOSEPAR:
             case FIN:
-                int a=automate.popReturnSymbol();
+                a=automate.popReturnSymbol();
                 automate.popSymbol();
-                int b=automate.popReturnSymbol();
+                b=automate.popReturnSymbol();
                 automate.reduction(3, new Entier(a*b,E));
+            break;
+        default:
+            automate.transitionSimple(&err, this);
             break;
         }
 return false;
 }
 
 bool E9::transition(Automate & automate,Symbole * s) {
+    int a;
+    Symbole err= Symbole(ERREUR);
+
         switch (*s){
             case PLUS:
             case MULT:
             case CLOSEPAR:
             case FIN:
                 automate.popSymbol();
-                int a=automate.popReturnSymbol();
+                a=automate.popReturnSymbol();
                 automate.popSymbol();
                 automate.reduction(3, new Entier(a,E));
             break;
-        }
+            default:
+                automate.transitionSimple(&err, this);
+                break;
+            }
 return false;
 }

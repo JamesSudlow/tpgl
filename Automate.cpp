@@ -15,7 +15,7 @@ void Automate::transitionSimple(Symbole * s, Etat * e) {
     statestack.push_back(e);
 }
 void Automate::reduction(int n,Entier * s) {
-    cout<<s->valeur<<endl;
+    result=s->valeur;
     for (int i=0;i<n;i++)
     {
         delete(statestack.back());
