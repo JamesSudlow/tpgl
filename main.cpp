@@ -5,34 +5,38 @@
 using namespace std;
 
 int main(void) {
-   string chaine("((1+34)*123");
+   string chaine("(1+34)*123");
 
    Lexer l(chaine);
 
    Symbole * s;
+   Symbole * s2;
+
    s=l.Consulter();
-       cout<<"Create E0"<<endl;
 
    E0* etatInitial=new E0();
-       cout<<"Create automate"<<endl;
 
    Automate* automate=new Automate(&l,etatInitial);
-   cout<<"Do transition"<<endl;
-   cout<<*s<<endl;
+
    int i=0;
-   while(!automate->statestack.back()->transition(*automate, s) && i<10){
+   while(!automate->statestack.back()->transition(*automate, s) && i<20){
       s=l.Consulter();
-      if(*s==ERREUR){
+      s2=automate->symbolstack.back();
+      if(*s2==ERREUR){
         cout<<"Il y a une erreur"<<endl;
         break;
       }
       //cout<<automate->statestack.back()->name;
+
+      //s2->Affiche();
+
+      //cout<<endl;
+      i++;
       //s->Affiche();
       //cout<<endl;
-      //i++;
    }
-   if(*s!=ERREUR){
-        cout<<"La valeur précédente est correcte"<<endl;
+   if(*s2!=ERREUR){
+        cout<<"La valeur correcte est : "<<automate->result<<endl;
    }
    return 0;
 }

@@ -7,6 +7,7 @@ using namespace std;
 
 class Automate{
     public:
+    int result;
     Automate(Lexer* l, Etat* e);
     void decalage(Symbole * s, Etat * e);
     void reduction(int n,Entier * s);
