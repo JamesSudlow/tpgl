@@ -2,9 +2,10 @@
 #include "lexer.h"
 #include "Automate.h"
 #include <string>
+using namespace std;
 
 int main(void) {
-   string chaine("(1+34)*123");
+   string chaine("((1+34)*123");
 
    Lexer l(chaine);
 
@@ -21,10 +22,17 @@ int main(void) {
    int i=0;
    while(!automate->statestack.back()->transition(*automate, s) && i<10){
       s=l.Consulter();
+      if(*s==ERREUR){
+        cout<<"Il y a une erreur"<<endl;
+        break;
+      }
       //cout<<automate->statestack.back()->name;
       //s->Affiche();
       //cout<<endl;
       //i++;
+   }
+   if(*s!=ERREUR){
+        cout<<"La valeur précédente est correcte"<<endl;
    }
    return 0;
 }

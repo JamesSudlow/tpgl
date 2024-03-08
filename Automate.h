@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 #include "Etat.h"
 #include <vector>
 #include "lexer.h"
