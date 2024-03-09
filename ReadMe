@@ -1,3 +1,3 @@
-g++ -c *.cpp
-g++ -o code *.o
-./code
+make creates the code.
+make clean deletes the .o and code.
+make run runs the program.
