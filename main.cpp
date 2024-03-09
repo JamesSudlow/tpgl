@@ -31,14 +31,13 @@ int main(void) {
             mode=-1;
             cout<<chaine;
          }
-         // Use a while loop together with the getline() function to read the file line by line
          if (mode==1 && getline(MyReadFile, chaine)) {
-            // Output the text from the file
             cout << chaine<<endl;
          }
          else{
             if(mode==1){
-               MyReadFile.close(); 
+               MyReadFile.close();
+               break; 
             }
             mode=-1;
          }
@@ -50,10 +49,7 @@ int main(void) {
          s=l.Consulter();
 
          E0* etatInitial=new E0();
-      /*// Read from the text file
 
-      // Use a while loop together with the getline() function to read the file line by line
-      while (getline (MyReadFile, myText)) {*/
          Automate* automate=new Automate(&l,etatInitial);
 
          int i=0;
@@ -64,14 +60,6 @@ int main(void) {
                cout<<"Il y a une erreur dans la formule"<<endl;
                break;
             }
-            //cout<<automate->statestack.back()->name;
-
-            //s2->Affiche();
-
-            //cout<<endl;
-            //i++;
-            //s->Affiche();
-            //cout<<endl;
          }
          if(*s2!=ERREUR && *s!=ERREUR){
             cout<<"La valeur correcte est : "<<automate->result<<endl;
