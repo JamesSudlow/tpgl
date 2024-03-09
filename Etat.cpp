@@ -27,7 +27,7 @@ E7::~E7(){}
 E8::~E8(){}
 E9::~E9(){}
 bool E0::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -39,13 +39,13 @@ bool E0::transition(Automate & automate, Symbole * s) {
         automate.transitionSimple(s, new E1);
         break;
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 bool E1::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case PLUS:
         automate.decalage(s, new E4);
@@ -57,13 +57,13 @@ bool E1::transition(Automate & automate, Symbole * s) {
         return true;  
         break;
         default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 bool E2::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -75,13 +75,13 @@ bool E2::transition(Automate & automate, Symbole * s) {
         automate.transitionSimple(s, new E6);
         break;
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 bool E3::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     int a;
     switch (*s){
     case PLUS:
@@ -93,7 +93,7 @@ bool E3::transition(Automate & automate, Symbole * s) {
         automate.reduction(1, new Entier(a,E));
         break;   
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;    
     }
     return false;
@@ -117,7 +117,7 @@ bool E4::transition(Automate & automate, Symbole * s) {
     return false;
 }
 bool E5::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case INT:
         automate.decalage(s, new E3);
@@ -129,13 +129,13 @@ bool E5::transition(Automate & automate, Symbole * s) {
         automate.transitionSimple(s, new E8);
         break;       
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 bool E6::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     switch (*s){
     case PLUS:
         automate.decalage(s, new E4);
@@ -147,13 +147,13 @@ bool E6::transition(Automate & automate, Symbole * s) {
         automate.decalage(s, new E9);
         break;       
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 bool E7::transition(Automate & automate, Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     int a,b;
     switch (*s){
     case MULT:
@@ -168,14 +168,14 @@ bool E7::transition(Automate & automate, Symbole * s) {
         automate.reduction(3, new Entier(a+b,E));
         break;       
     default:
-        automate.transitionSimple(&err, this);
+        automate.transitionSimple(err, this);
         break;
     }
     return false;
 }
 
 bool E8::transition(Automate & automate,Symbole * s) {
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
     int a,b;
         switch (*s){
             case PLUS:
@@ -188,7 +188,7 @@ bool E8::transition(Automate & automate,Symbole * s) {
                 automate.reduction(3, new Entier(a*b,E));
             break;
         default:
-            automate.transitionSimple(&err, this);
+            automate.transitionSimple(err, this);
             break;
         }
 return false;
@@ -196,7 +196,7 @@ return false;
 
 bool E9::transition(Automate & automate,Symbole * s) {
     int a;
-    Symbole err= Symbole(ERREUR);
+    Symbole* err= new Symbole(ERREUR);
 
         switch (*s){
             case PLUS:
@@ -209,7 +209,7 @@ bool E9::transition(Automate & automate,Symbole * s) {
                 automate.reduction(3, new Entier(a,E));
             break;
             default:
-                automate.transitionSimple(&err, this);
+                automate.transitionSimple(err, this);
                 break;
             }
 return false;

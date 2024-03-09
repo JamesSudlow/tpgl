@@ -61,8 +61,8 @@ int main(void) {
             s=l.Consulter();
             s2=automate->symbolstack.back();
             if(*s2==ERREUR ||*s==ERREUR){
-            cout<<"Il y a une erreur dans la formule"<<endl;
-            break;
+               cout<<"Il y a une erreur dans la formule"<<endl;
+               break;
             }
             //cout<<automate->statestack.back()->name;
 
@@ -73,7 +73,7 @@ int main(void) {
             //s->Affiche();
             //cout<<endl;
          }
-         if(*s2!=ERREUR){
+         if(*s2!=ERREUR && *s!=ERREUR){
             cout<<"La valeur correcte est : "<<automate->result<<endl;
          }
       }
