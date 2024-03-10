@@ -1,3 +1,5 @@
 make creates the code.
 make clean deletes the .o and code.
 make run runs the program.
+instructions for what to do when running are inbuilt.
+test.txt is a file with a group of calculations to check the functionning of the program

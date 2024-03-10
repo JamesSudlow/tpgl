@@ -9,7 +9,7 @@ int main(void) {
    while(1){
       int mode=-1;
       cout<<"Please type in a number between 0 and 3"<<endl;
-      cout<<"0 means logout, 1 loads a file, 2 types in a value, 3 uses default chaine"<<endl;
+      cout<<"0 means close program, 1 loads a file, 2 types in a value, 3 uses default chaine"<<endl;
       cin>>mode;
       if(mode==0){
          break;
@@ -18,7 +18,6 @@ int main(void) {
       string fileName="";
       if(mode==1){
          cin>>fileName;
-         cout<<fileName;
       }
       ifstream MyReadFile(fileName);
 
@@ -29,7 +28,7 @@ int main(void) {
          }
          if(mode==3){
             mode=-1;
-            cout<<chaine;
+            cout<<chaine<<endl;
          }
          if (mode==1 && getline(MyReadFile, chaine)) {
             cout << chaine<<endl;
